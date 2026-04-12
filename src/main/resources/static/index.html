@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Resume Analyzer</title>
+    <link rel="stylesheet" href="/styles.css"/>
+</head>
+<body>
+<header class="header">
+    <div class="header-inner">
+        <h1>Resume Analyzer</h1>
+        <p class="tagline">Upload a PDF or Word resume for AI-powered ATS feedback.</p>
+    </div>
+</header>
+
+<main class="container">
+    <section id="auth-section" class="card">
+        <h2>Account</h2>
+        <div class="tabs">
+            <button type="button" class="tab active" data-tab="login">Login</button>
+            <button type="button" class="tab" data-tab="register">Register</button>
+        </div>
+        <form id="login-form" class="auth-form">
+            <label>Email
+                <input type="email" name="email" required autocomplete="username"/>
+            </label>
+            <label>Password
+                <input type="password" name="password" required autocomplete="current-password"/>
+            </label>
+            <button type="submit" class="btn primary">Login</button>
+        </form>
+        <form id="register-form" class="auth-form hidden">
+            <label>Email
+                <input type="email" name="email" required autocomplete="username"/>
+            </label>
+            <label>Password (min 8 characters)
+                <input type="password" name="password" required minlength="8" autocomplete="new-password"/>
+            </label>
+            <button type="submit" class="btn primary">Create account</button>
+        </form>
+        <p id="auth-status" class="status"></p>
+    </section>
+
+    <section id="app-section" class="hidden">
+        <div class="card toolbar">
+            <div>
+                <p class="signed-in">Signed in as <strong id="user-email"></strong></p>
+            </div>
+            <button type="button" id="logout-btn" class="btn ghost">Logout</button>
+        </div>
+
+        <section class="card">
+            <h2>Analyze resume</h2>
+            <p class="hint">Accepted: PDF, DOC, DOCX (max 10 MB).</p>
+            <form id="upload-form">
+                <input type="file" id="file-input" name="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required/>
+                <button type="submit" class="btn primary" id="analyze-btn">Analyze</button>
+            </form>
+            <p id="upload-status" class="status"></p>
+        </section>
+
+        <section class="card" id="results-section">
+            <h2>Results</h2>
+            <div id="results-empty" class="muted">Run an analysis to see AI output here.</div>
+            <div id="results-content" class="hidden">
+                <div class="score-row">
+                    <div class="score">
+                        <span class="score-label">ATS score</span>
+                        <span id="ats-score" class="score-value">—</span>
+                    </div>
+                    <p id="summary" class="summary"></p>
+                </div>
+                <h3>Skills</h3>
+                <ul id="skills-list" class="chips"></ul>
+                <h3>Suggested improvements</h3>
+                <ul id="improvements-list" class="improvements"></ul>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="section-head">
+                <h2>Recent analyses</h2>
+                <button type="button" id="refresh-history" class="btn ghost">Refresh</button>
+            </div>
+            <div id="history-empty" class="muted">No history yet.</div>
+            <table id="history-table" class="hidden">
+                <thead>
+                <tr>
+                    <th>When</th>
+                    <th>File</th>
+                    <th>ATS</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+    </section>
+</main>
+
+<footer class="footer">
+    <span>AI-Powered Resume Analyzer · Spring Boot</span>
+</footer>
+
+<script src="/app.js" defer></script>
+</body>
+</html>
