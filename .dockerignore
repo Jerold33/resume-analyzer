@@ -1,0 +1,6 @@
+target/*
+!target/resume-analyzer-0.0.1-SNAPSHOT.jar
+.mvn
+.git
+.gitignore
+*.md
